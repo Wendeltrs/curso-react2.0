@@ -1,7 +1,14 @@
-export const App = () =>  {
+import { BrowserRouter } from "react-router-dom";
+import { AppRoutes } from "./routes";
+
+export const App = () => {
   return (
-    <div className="App">
-      Teste!
-    </div>
+    <BrowserRouter
+      future={{
+        v7_relativeSplatPath: true,
+      }}
+    >
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
