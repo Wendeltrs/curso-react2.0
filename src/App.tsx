@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./routes";
 import { AppThemeProvider } from "./shared/contexts/ThemeContext";
+import { MenuLateral } from "./shared/components";
 
 export const App = () => {
   return (
@@ -10,7 +11,9 @@ export const App = () => {
           v7_relativeSplatPath: true,
         }}
       >
-        <AppRoutes />
+        <MenuLateral>
+          <AppRoutes />
+        </MenuLateral>
       </BrowserRouter>
     </AppThemeProvider>
   );
