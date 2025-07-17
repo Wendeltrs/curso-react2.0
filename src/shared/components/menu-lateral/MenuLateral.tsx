@@ -1,5 +1,6 @@
-import { Avatar, Box, Divider, Drawer, List, ListItemButton, ListItemIcon, ListItemText, useTheme } from "@mui/material"
+import { Avatar, Box, Divider, Drawer, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from "@mui/material"
 import { IconHome } from "@tabler/icons-react";
+import { useDrawerContext } from "../../contexts";
 
 interface IMenuLateralProps {
     children: React.ReactNode;
@@ -7,10 +8,12 @@ interface IMenuLateralProps {
 
 export const MenuLateral = ({ children }: IMenuLateralProps) => {
     const theme = useTheme();
+    const smDown = useMediaQuery(theme.breakpoints.down('sm'));
+    const { isDrawerOpen, toggleIsDrawerOpen } = useDrawerContext();
 
     return (
         <>
-            <Drawer variant="permanent">
+            <Drawer open={isDrawerOpen} variant={smDown ? "temporary" : "permanent"} onClose={toggleIsDrawerOpen}>
                 <Box width={theme.spacing(28)} height={'100%'} display={'flex'} flexDirection={'column'}>
                     <Box
                         width={'100%'}
@@ -39,7 +42,7 @@ export const MenuLateral = ({ children }: IMenuLateralProps) => {
                     </Box>
                 </Box>
             </Drawer>
-            <Box sx={{ height: '100vh', marginLeft: theme.spacing(28) }}>
+            <Box sx={{ height: '100vh', marginLeft: smDown ? 0 : theme.spacing(28) }}>
                 {children}
             </Box>
         </>
