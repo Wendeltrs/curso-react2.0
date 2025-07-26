@@ -1,6 +1,7 @@
 import { Avatar, Box, Divider, Drawer, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from "@mui/material";
-import { useDrawerContext } from "../../contexts";
+import { useDrawerContext, useThemeContext } from "../../contexts";
 import { useMatch, useNavigate, useResolvedPath } from "react-router-dom";
+import { IconMoon, IconSun } from "@tabler/icons-react";
 
 interface IMenuLateralProps {
     children: React.ReactNode;
@@ -36,6 +37,7 @@ export const MenuLateral = ({ children }: IMenuLateralProps) => {
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
     const { isDrawerOpen, toggleIsDrawerOpen, drawerOptions } = useDrawerContext();
+    const { toggleTheme, themeName } = useThemeContext();
 
     return (
         <>
@@ -67,6 +69,20 @@ export const MenuLateral = ({ children }: IMenuLateralProps) => {
                                     onClick={toggleIsDrawerOpen}
                                 />
                             ))}
+                        </List>
+                    </Box>
+                    <Box>
+                        <List component={'nav'}>
+                            <ListItemButton onClick={toggleTheme}>
+                                <ListItemIcon>
+                                    {themeName === 'light' ? (
+                                        <IconMoon/>                                    
+                                    ) : (
+                                        <IconSun/>
+                                    )}
+                                </ListItemIcon>
+                                <ListItemText primary={'Alterar tema'} />
+                            </ListItemButton>
                         </List>
                     </Box>
                 </Box>
